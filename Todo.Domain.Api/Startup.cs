@@ -18,26 +18,25 @@ namespace Todo.Domain.Api
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }       
+        public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
             services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("Database"));
+            services.AddDbContext<TodoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connectionString")));
+
             services.AddTransient<ITodoRepository, TodoRepository>();
             services.AddTransient<TodoHandler, TodoHandler>();
-        }        
+        }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
