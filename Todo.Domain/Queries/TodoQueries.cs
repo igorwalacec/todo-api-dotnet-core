@@ -10,6 +10,10 @@ namespace Todo.Domain.Queries
         {
             return x => x.RefUser == refUser;
         }
+        public static Expression<Func<TodoItem, bool>> GetAllDone(string refUser)
+        {
+            return x => x.RefUser == refUser && x.Done;
+        }
         public static Expression<Func<TodoItem, bool>> GetAllUndone(string refUser)
         {
             return x => x.RefUser == refUser && !x.Done;
