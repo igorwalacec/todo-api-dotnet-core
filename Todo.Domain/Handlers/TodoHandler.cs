@@ -11,7 +11,7 @@ namespace Todo.Domain.Handlers
                     IHandler<CreateTodoCommand>, 
                     IHandler<UpdateTodoCommand>,
                     IHandler<MarkTodoAsDoneCommand>,
-                    IHandler<MarkTodoAsUndoneCommand>,
+                    IHandler<MarkTodoAsUndoneCommand>
     {
         private readonly ITodoRepository _repository;
         public TodoHandler(ITodoRepository repository)
